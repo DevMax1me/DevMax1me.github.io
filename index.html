@@ -10,15 +10,20 @@
             --font-family: "Helvetica Neue", Arial, sans-serif;
             --transition-speed: 0.3s;
 
-            /* Couleurs mode clair */
-            --bg-gradient-light: linear-gradient(to right, #fff, #ffffff9a);
+            /* Couleurs mode clair (plus contrastées) */
+            --bg-gradient-light: linear-gradient(to right, #f7f7f7, #ececec);
+            /* Fond gris clair, plus contrasté */
             --text-color-light: #333;
-            --nav-bg-light: rgba(255, 255, 255, 0);
-            --input-bg-light: #fff;
+            --nav-bg-light: rgba(255, 255, 255, 0.8);
+            /* Nav plus visible en mode clair */
+            --input-bg-light: #ffffff;
+            /* Champs bien blancs */
             --button-bg-light: #333;
+            /* Bouton foncé (gris très foncé) */
             --button-text-light: #fff;
+            /* Texte du bouton blanc pour contraste */
 
-            /* Couleurs mode sombre */
+            /* Couleurs mode sombre (inchangées) */
             --bg-gradient-dark: linear-gradient(to right, #353b48, #2f3640);
             --text-color-dark: #fff;
             --nav-bg-dark: rgba(0, 0, 0, 0.3);
@@ -26,6 +31,12 @@
             --button-bg-dark: #fff;
             --button-text-dark: #333;
         }
+
+        body.light-mode section:nth-of-type(even) {
+            background: #e0e0e0;
+            /* Gris plus foncé pour mieux délimiter les sections en mode clair */
+        }
+
 
         body {
             font-family: var(--font-family);
@@ -363,14 +374,16 @@
             font-weight: bold;
             margin-bottom: 10px;
             text-transform: uppercase;
-            color: #f5f6fa;
+            color: inherit;
+            /* Au lieu de #f5f6fa ou autre couleur fixe */
         }
 
         .timeline-content h4 {
             margin: 0;
             font-size: 1.7rem;
             margin-bottom: 10px;
-            color: #fff;
+            color: inherit;
+            /* Au lieu de #fff */
             font-weight: 600;
             opacity: 0;
             transform: translateY(20px);
@@ -381,11 +394,13 @@
             margin: 0;
             font-size: 1rem;
             line-height: 1.4;
-            color: #fff;
+            color: inherit;
+            /* Au lieu de #fff */
             opacity: 0;
             transform: translateY(20px);
             transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
         }
+
 
         /* Classe .show ajoutée en JS lorsque l’item est visible */
         .timeline-item.show {
@@ -461,7 +476,8 @@
         .experience-card h4 {
             margin: 10px 0;
             font-size: 1.5rem;
-            color: #fff;
+            color: inherit;
+            /* Au lieu de #fff */
             font-weight: 600;
         }
 
@@ -469,29 +485,32 @@
             margin: 0;
             font-size: 1rem;
             font-weight: 500;
-            color: #fff;
+            color: inherit;
+            /* Au lieu de #fff */
             margin-bottom: 5px;
         }
 
         .experience-card .period {
             margin: 0;
             font-size: 0.9rem;
-            color: #ddd;
+            color: inherit;
+            /* Au lieu de #ddd ou autre */
             margin-bottom: 15px;
-        }
-
-        .experience-card .tasks {
-            list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
         .experience-card .tasks li {
             font-size: 0.95rem;
             line-height: 1.4;
-            color: #fff;
+            color: inherit;
+            /* Au lieu de #fff */
             margin-bottom: 8px;
         }
+
+        .experience-card .period {
+            color: rgba(0, 0, 0, 0.7);
+            /* En dark mode, ce sera #fff multiplié par l'héritage, donc plus clair */
+        }
+
 
         /* Animation lorsqu'elles apparaissent à l’écran */
         .experience-card.show-exp {
@@ -568,7 +587,8 @@
         .project-card h4 {
             margin: 0;
             font-size: 1.5rem;
-            color: #fff;
+            color: inherit;
+            /* pas #fff */
             font-weight: 600;
         }
 
@@ -576,8 +596,10 @@
             margin: 0;
             font-size: 1rem;
             line-height: 1.4;
-            color: #fff;
+            color: inherit;
+            /* pas #fff */
         }
+
 
         /* Badges techniques */
         .tech-stack {
@@ -715,7 +737,7 @@
                 avec
                 HTML, CSS et JavaScript.<br><br>
                 Vous pouvez consulter mes projets, mon CV détaillé, et en savoir plus sur mon parcours.<br><br>
-                <a href="https://github.com/">Voir mon GitHub</a>
+                <a href="https://github.com/DevMax1me">Voir mon GitHub</a>
             </div>
         </div>
     </section>
