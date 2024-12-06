@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - DIDIER Maxime</title>
     <style>
         :root {
@@ -10,18 +11,18 @@
             --transition-speed: 0.3s;
 
             /* Couleurs mode clair */
-            --bg-gradient-light: linear-gradient(to right, #e0eafc, #cfdef3);
+            --bg-gradient-light: linear-gradient(to right, #fff, #ffffff9a);
             --text-color-light: #333;
-            --nav-bg-light: rgba(255, 255, 255, 0.7);
+            --nav-bg-light: rgba(255, 255, 255, 0);
             --input-bg-light: #fff;
             --button-bg-light: #333;
             --button-text-light: #fff;
 
             /* Couleurs mode sombre */
-            --bg-gradient-dark: linear-gradient(to right, #2d2d30,#1e1e1e);
+            --bg-gradient-dark: linear-gradient(to right, #353b48, #2f3640);
             --text-color-dark: #fff;
             --nav-bg-dark: rgba(0, 0, 0, 0.3);
-            --input-bg-dark: rgba(255,255,255,0.1);
+            --input-bg-dark: rgba(255, 255, 255, 0.1);
             --button-bg-dark: #fff;
             --button-text-dark: #333;
         }
@@ -137,7 +138,8 @@
             animation: fade-in 1.5s ease forwards;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             margin: 10px;
             text-align: center;
             opacity: 0;
@@ -157,7 +159,9 @@
         }
 
         @keyframes fade-in {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slide-in {
@@ -165,6 +169,7 @@
                 transform: translateY(20px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
@@ -179,17 +184,17 @@
             animation: slide-in 1s ease forwards;
             animation-delay: 0.9s;
         }
-        
+
         a {
             color: inherit;
             text-decoration: none;
             border-bottom: 2px solid currentColor;
             transition: color var(--transition-speed), border-color var(--transition-speed);
         }
-        
+
         a:hover {
-            color: #ffd700;
-            border-color: #ffd700;
+            color: hsl(212, 100%, 50%);
+            border-color: hsl(212, 100%, 50%);
         }
 
         /* Sections */
@@ -203,11 +208,11 @@
         }
 
         section:nth-of-type(even) {
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
         }
 
         body.light-mode section:nth-of-type(even) {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         section h3 {
@@ -226,6 +231,7 @@
                 transform: translateY(30px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
@@ -246,7 +252,8 @@
             font-weight: 500;
         }
 
-        input, textarea {
+        input,
+        textarea {
             width: 100%;
             padding: 10px;
             border: none;
@@ -257,18 +264,21 @@
             transition: background var(--transition-speed), color var(--transition-speed);
         }
 
-        body.light-mode input, body.light-mode textarea {
+        body.light-mode input,
+        body.light-mode textarea {
             background: var(--input-bg-light);
             color: var(--text-color-light);
         }
 
-        input:focus, textarea:focus {
-            outline: 2px solid #ffd700;
-            background: rgba(255,255,255,0.1);
+        input:focus,
+        textarea:focus {
+            outline: 2px solid hsl(212, 100%, 50%);
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        body.light-mode input:focus, body.light-mode textarea:focus {
-            background: rgba(0,0,0,0.1);
+        body.light-mode input:focus,
+        body.light-mode textarea:focus {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         button {
@@ -288,18 +298,383 @@
         }
 
         button:hover {
-            background: #ffd700;
+            background: hsl(212, 100%, 50%);
             color: #333;
             transform: scale(1.05);
         }
 
+        .timeline {
+            position: relative;
+            margin: 50px 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), #c23616);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 40px 0;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e84118;
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px solid #fff;
+        }
+
+        .timeline-item:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #f5f6fa;
+        }
+
+        .timeline-content h4 {
+            margin: 0;
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .timeline-content p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.4;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
+        }
+
+        /* Classe .show ajoutée en JS lorsque l’item est visible */
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item.show h4,
+        .timeline-item.show p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #experience {
+            position: relative;
+            padding: 100px 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        #experience h3 {
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+
+        /* Container qui aligne les cartes au centre et les rend responsive */
+        .experience-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Style des cartes */
+        .experience-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 300px;
+            max-width: 90%;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        /* Survol de la carte pour un effet subtil */
+        .experience-card:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Logo entreprise */
+        .company-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .company-logo img {
+            max-width: 60px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        /* Titres et textes */
+        .experience-card h4 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .experience-card .company {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .experience-card .period {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .experience-card .tasks {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .experience-card .tasks li {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        /* Animation lorsqu'elles apparaissent à l’écran */
+        .experience-card.show-exp {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframe utilisée pour la section elle-même */
+        @keyframes fade-up {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .experience-card {
+                width: 90%;
+            }
+        }
+
+        #projet {
+            position: relative;
+            padding: 100px 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        #projet h3 {
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+
+        /* Grille de projets responsive */
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px 20px;
+            width: 300px;
+            max-width: 90%;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        /* Badges techniques */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tech-stack span {
+            background: hsl(212, 100%, 50%);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Classe ajoutée par JS à l'apparition */
+        .project-card.show-proj {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation d'apparition de la section */
+        @keyframes fade-up {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .project-card {
+                width: 90%;
+            }
+        }
+
+        section+hr {
+            border: none;
+            height: 2px;
+            max-width: 100px;
+            margin: 0 auto;
+            background: hsl(212, 100%, 50%);
+            opacity: 0.5;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            /* Couleur par défaut (mode sombre) */
+            color: #000;
+            /* Couleur de l'icône en mode sombre */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background 0.3s, color 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* Lorsque le site est en mode clair, le bouton devient noir et l'icône blanche */
+        body.light-mode .back-to-top {
+            background: #000;
+            color: #fff;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <nav>
             <div class="left-nav">
                 <ul>
+                    <li><a href="#hero">Accueil</a></li>
                     <li><a href="#formation">Formation</a></li>
                     <li><a href="#experience">Expérience</a></li>
                     <li><a href="#projet">Projet</a></li>
@@ -308,12 +683,14 @@
             </div>
             <button class="mode-toggle">
                 <!-- Icône Lune (mode sombre) -->
-                <svg id="icon-dark" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <svg id="icon-dark" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
                 </svg>
-            
+
                 <!-- Icône Soleil (mode clair) -->
-                <svg id="icon-light" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <svg id="icon-light" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
                     <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -324,84 +701,287 @@
                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
-            </button>                         
+            </button>
         </nav>
     </header>
 
-    <div class="hero">
-        <h1>DIDIER Maxime</h1>
-        <h2>Développeur 2.0</h2>
-        <div class="info">
-            Bienvenue sur mon portfolio !<br>
-            Passionné par la création d’expériences web modernes, je me spécialise dans le développement front-end avec HTML, CSS et JavaScript.<br><br>
-            Vous pouvez consulter mes projets, mon CV détaillé, et en savoir plus sur mon parcours.<br><br>
-            <a href="https://github.com/">Voir mon GitHub</a>
+    <section id="hero">
+        <div class="hero">
+            <h1>DIDIER Maxime</h1>
+            <h2>Développeur 2.0</h2>
+            <div class="info">
+                Bienvenue sur mon portfolio !<br>
+                Passionné par la création d’expériences web modernes, je me spécialise dans le développement front-end
+                avec
+                HTML, CSS et JavaScript.<br><br>
+                Vous pouvez consulter mes projets, mon CV détaillé, et en savoir plus sur mon parcours.<br><br>
+                <a href="https://github.com/">Voir mon GitHub</a>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <hr>
     <section id="formation">
         <h3>Formation</h3>
-        <p>
-            Présentez ici votre parcours universitaire, vos diplômes, vos certifications,<br>
-            et toute formation professionnelle pertinente.
-        </p>
+        <div class="timeline">
+            <div class="timeline-item animate">
+                <div class="timeline-date">2017</div>
+                <div class="timeline-content">
+                    <h4>Baccalauréat S (SVT)</h4>
+                    <p>Saint Marc, Nivolas-Vermelle</p>
+                </div>
+            </div>
+            <div class="timeline-item animate">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-content">
+                    <h4>BTS SNIR</h4>
+                    <p>ORT, Lyon</p>
+                </div>
+            </div>
+            <div class="timeline-item animate">
+                <div class="timeline-date">2022</div>
+                <div class="timeline-content">
+                    <h4>Bachelor CSI (Mention Bien)</h4>
+                    <p>ORT, Lyon</p>
+                </div>
+            </div>
+            <div class="timeline-item animate">
+                <div class="timeline-date">2024</div>
+                <div class="timeline-content">
+                    <h4>Master MS2D (2ème de promo, Mention Bien)</h4>
+                    <p>ORT, Lyon</p>
+                </div>
+            </div>
+        </div>
     </section>
-
+    <hr>
     <section id="experience">
-        <h3>Expérience</h3>
-        <p>
-            Présentez vos expériences professionnelles antérieures, les postes occupés,<br>
-            les missions effectuées et les compétences développées.
-        </p>
-    </section>
+        <h3>Expériences</h3>
+        <div class="experience-container">
+            <!-- Exemple d'expérience 1 -->
+            <div class="experience-card animate-exp">
+                <div class="company-logo">
+                    <!-- Vous pouvez mettre un logo d'entreprise sous forme d'img ou d'icône -->
+                    <img src="url-vers-logo-entreprise-1.png" alt="Logo Entreprise 1">
+                </div>
+                <h4>CTO</h4>
+                <p class="company">Startup BasitMark, Paris</p>
+                <p class="period">Septembre 2023 - Actuellement</p>
+                <ul class="tasks">
+                    <li>Gestion du projet</li>
+                    <li>Développeur React Native</li>
+                    <li>Développeur Symfony PHP</li>
+                </ul>
+            </div>
 
+            <!-- Exemple d'expérience 2 -->
+            <div class="experience-card animate-exp">
+                <div class="company-logo">
+                    <img src="url-vers-logo-entreprise-2.png" alt="Logo Entreprise 2">
+                </div>
+                <h4>Alternant développeur Full Stack</h4>
+                <p class="company">CEBEL Habitat, Saint-Quentin-Fallavier</p>
+                <p class="period">Septembre 2021 - Septembre 2024</p>
+                <ul class="tasks">
+                    <li>Développement d'API REST (PHP)</li>
+                    <li>Développeur Full Stack (symfony, PHP / Twig, html, css)</li>
+                    <li>Création d’interfaces (Python)</li>
+                    <li>Gestion de l'infrastructure</li>
+                </ul>
+            </div>
+            <div class="experience-card animate-exp">
+                <div class="company-logo">
+                    <img src="url-vers-logo-entreprise-2.png" alt="Logo Entreprise 2">
+                </div>
+                <h4>Informaticien</h4>
+                <p class="company">SEROO Informatique, Saint Clair de la tour</p>
+                <p class="period">Juin 2020 - Septembre 2020</p>
+                <ul class="tasks">
+                    <li>Reconditonnement d'ordinateur fixe et portable</li>
+                    <li>Réparation d'ordinateur et téléphone</li>
+                    <li>Correction sur le site WordPress</li>
+                </ul>
+            </div>
+    </section>
+    <hr>
     <section id="projet">
-        <h3>Projet</h3>
-        <p>
-            Décrivez vos projets personnels ou professionnels, partagez des liens vers des démos,<br>
-            des dépôts GitHub, et expliquez le contexte de réalisation.
-        </p>
-    </section>
+        <h3>Projets</h3>
+        <div class="projects-grid">
+            <div class="project-card animate-proj">
+                <h4>BasitMark</h4>
+                <p>Développement front et back, application mobile en React Native & Symfony, disponible sur les stores.
+                </p>
+                <div class="tech-stack">
+                    <span>React Native</span><span>Symfony</span>
+                </div>
+            </div>
 
+            <div class="project-card animate-proj">
+                <h4>Picshoot</h4>
+                <p>Développement back et front, intégration d’IA en Python, React.js, et Symfony PHP.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>React.js</span><span>Symfony</span>
+                </div>
+            </div>
+
+            <div class="project-card animate-proj">
+                <h4>PatateDouce</h4>
+                <p>Développement front et back, technologies HTML, CSS, et Symfony PHP.</p>
+                <div class="tech-stack">
+                    <span>HTML</span><span>CSS</span><span>Symfony</span>
+                </div>
+            </div>
+
+            <div class="project-card animate-proj">
+                <h4>QR Code</h4>
+                <p>Développement back et front en Python. Génération et gestion de QR Codes.</p>
+                <div class="tech-stack">
+                    <span>Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
     <section id="contact">
         <h3>Contact</h3>
-        <form>
+        <form id="contact-form">
             <label for="name">Nom</label>
-            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+            <input type="text" id="name" name="name" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Votre email" required>
+            <input type="email" id="email" name="email" required>
 
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Votre message" required></textarea>
+            <textarea id="message" name="message" rows="5" required></textarea>
 
             <button type="submit">Envoyer</button>
         </form>
     </section>
-
+    <div class="back-to-top" id="back-to-top">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"></path>
+        </svg>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
     <script>
+        // Initialisation EmailJS avec votre clé publique
+        (function () {
+            emailjs.init("ic04QkG9qfxP_c947");
+        })();
+        const form = document.getElementById('contact-form');
+
+        // Gestionnaire d'événement pour le formulaire de contact
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            emailjs.sendForm('service_s0to1xo', 'template_3l88cw4', form)
+                .then(function () {
+                    alert('Message envoyé !');
+                    form.reset(); // Utilise la référence explicite au formulaire
+                }, function (error) {
+                    alert('Erreur lors de l\'envoi : ' + JSON.stringify(error));
+                });
+        });
+
         const toggleBtn = document.querySelector('.mode-toggle');
         const body = document.body;
         const iconLight = document.getElementById('icon-light');
         const iconDark = document.getElementById('icon-dark');
 
         function updateIcons() {
-        if (body.classList.contains('light-mode')) {
-            iconLight.style.display = 'inline-block';
-            iconDark.style.display = 'none';
-        } else {
-            iconLight.style.display = 'none';
-            iconDark.style.display = 'inline-block';
-        }
+            if (body.classList.contains('light-mode')) {
+                iconLight.style.display = 'inline-block';
+                iconDark.style.display = 'none';
+            } else {
+                iconLight.style.display = 'none';
+                iconDark.style.display = 'inline-block';
+            }
         }
 
         toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        updateIcons();
+            body.classList.toggle('light-mode');
+            updateIcons();
         });
 
         // Initial
         updateIcons();
+
+        // Intersection Observer pour les éléments de la timeline
+        const items = document.querySelectorAll('.timeline-item.animate');
+
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        items.forEach(item => {
+            observer.observe(item);
+        });
+        const expItems = document.querySelectorAll('.experience-card.animate-exp');
+
+        const expObserverOptions = {
+            threshold: 0.2
+        };
+
+        const expObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-exp');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, expObserverOptions);
+
+        expItems.forEach(item => {
+            expObserver.observe(item);
+        });
+
+        const projItems = document.querySelectorAll('.project-card.animate-proj');
+
+        const projObserverOptions = {
+            threshold: 0.2
+        };
+
+        const projObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-proj');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, projObserverOptions);
+
+        projItems.forEach(item => {
+            projObserver.observe(item);
+        });
+
+        const backToTop = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+
     </script>
+
 </body>
+
 </html>
