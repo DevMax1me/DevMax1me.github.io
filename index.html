@@ -2,15 +2,43 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Portfolio - DIDIER Maxime</title>
     <style>
+        :root {
+            --font-family: "Helvetica Neue", Arial, sans-serif;
+            --transition-speed: 0.3s;
+
+            /* Couleurs mode clair */
+            --bg-gradient-light: linear-gradient(to right, #e0eafc, #cfdef3);
+            --text-color-light: #333;
+            --nav-bg-light: rgba(255, 255, 255, 0.7);
+            --input-bg-light: #fff;
+            --button-bg-light: #333;
+            --button-text-light: #fff;
+
+            /* Couleurs mode sombre */
+            --bg-gradient-dark: linear-gradient(to right, #2d2d30,#1e1e1e);
+            --text-color-dark: #fff;
+            --nav-bg-dark: rgba(0, 0, 0, 0.3);
+            --input-bg-dark: rgba(255,255,255,0.1);
+            --button-bg-dark: #fff;
+            --button-text-dark: #333;
+        }
+
         body {
-            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-family: var(--font-family);
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: #fff;
+            background: var(--bg-gradient-dark);
+            color: var(--text-color-dark);
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+            scroll-behavior: smooth;
+        }
+
+        body.light-mode {
+            background: var(--bg-gradient-light);
+            color: var(--text-color-light);
         }
 
         /* Navigation */
@@ -18,16 +46,21 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--nav-bg-dark);
             backdrop-filter: blur(5px);
             z-index: 999;
+            transition: background var(--transition-speed) ease;
+        }
+
+        body.light-mode header {
+            background: var(--nav-bg-light);
         }
 
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 10px 30px;
         }
 
         nav ul {
@@ -43,16 +76,51 @@
         }
 
         nav ul li a {
-            color: #ffffff;
+            color: inherit;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-            border-bottom: 2px solid transparent;
+            position: relative;
+            transition: transform var(--transition-speed), color var(--transition-speed);
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: currentColor;
+            transition: width var(--transition-speed) ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         nav ul li a:hover {
-            color: #e2e2e2;
-            border-bottom: 2px solid #e2e2e2;
+            transform: scale(1.05);
+        }
+
+        /* Bouton mode clair/sombre */
+        .mode-toggle {
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background: var(--button-bg-dark);
+            color: var(--button-text-dark);
+            transition: background var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .mode-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        body.light-mode .mode-toggle {
+            background: var(--button-bg-light);
+            color: var(--button-text-light);
         }
 
         /* Section Héro */
@@ -62,26 +130,39 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding-top: 80px; /* Pour que le contenu ne passe pas sous le header */
+            padding-top: 100px;
             box-sizing: border-box;
+            width: 100%;
+            opacity: 0;
+            animation: fade-in 1.5s ease forwards;
         }
 
         h1, h2 {
             margin: 10px;
             text-align: center;
+            opacity: 0;
+            animation: slide-in var(--transition-speed) ease forwards;
         }
 
         h1 {
             font-size: 3rem;
             font-weight: 700;
-            position: relative;
-            animation: slide-in 1.5s ease forwards;
-            opacity: 0;
+            animation-delay: 0.3s;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
         }
 
         @keyframes slide-in {
             0% {
-                transform: translateY(50px);
+                transform: translateY(20px);
                 opacity: 0;
             }
             100% {
@@ -90,80 +171,160 @@
             }
         }
 
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            animation: fade-in 2.5s ease forwards;
-            opacity: 0;
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
         .info {
             margin-top: 20px;
-            max-width: 600px;
             text-align: center;
             line-height: 1.6;
-            animation: fade-in 3.5s ease forwards;
             opacity: 0;
+            animation: slide-in 1s ease forwards;
+            animation-delay: 0.9s;
         }
         
         a {
-            color: #e2e2e2;
+            color: inherit;
             text-decoration: none;
-            border-bottom: 2px solid #e2e2e2;
-            transition: color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 2px solid currentColor;
+            transition: color var(--transition-speed), border-color var(--transition-speed);
         }
         
         a:hover {
-            color: #ffffff;
-            border-color: #ffffff;
+            color: #ffd700;
+            border-color: #ffd700;
         }
 
         /* Sections */
         section {
+            width: 100%;
             padding: 100px 20px;
-            max-width: 800px;
-            margin: 0 auto;
             box-sizing: border-box;
+            text-align: center;
+            opacity: 0;
+            animation: fade-up 0.8s ease forwards;
+        }
+
+        section:nth-of-type(even) {
+            background: rgba(0,0,0,0.1);
+        }
+
+        body.light-mode section:nth-of-type(even) {
+            background: rgba(255,255,255,0.2);
         }
 
         section h3 {
             font-size: 2rem;
-            text-align: center;
             margin-bottom: 30px;
         }
 
         section p {
-            text-align: center;
             line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
         }
 
-        /* Un petit effet visuel pour les sections */
-        .bg-alt {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin: 20px;
-            padding: 20px;
+        @keyframes fade-up {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
+
+        /* Formulaire de contact */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: inherit;
+            background: var(--input-bg-dark);
+            transition: background var(--transition-speed), color var(--transition-speed);
+        }
+
+        body.light-mode input, body.light-mode textarea {
+            background: var(--input-bg-light);
+            color: var(--text-color-light);
+        }
+
+        input:focus, textarea:focus {
+            outline: 2px solid #ffd700;
+            background: rgba(255,255,255,0.1);
+        }
+
+        body.light-mode input:focus, body.light-mode textarea:focus {
+            background: rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 10px;
+            background: var(--button-bg-dark);
+            color: var(--button-text-dark);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        body.light-mode button {
+            background: var(--button-bg-light);
+            color: var(--button-text-light);
+        }
+
+        button:hover {
+            background: #ffd700;
+            color: #333;
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="#formation">Formation</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#projet">Projet</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="left-nav">
+                <ul>
+                    <li><a href="#formation">Formation</a></li>
+                    <li><a href="#experience">Expérience</a></li>
+                    <li><a href="#projet">Projet</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <button class="mode-toggle">
+                <!-- Icône Lune (mode sombre) -->
+                <svg id="icon-dark" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
+                </svg>
+            
+                <!-- Icône Soleil (mode clair) -->
+                <svg id="icon-light" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>                         
         </nav>
     </header>
 
@@ -178,7 +339,7 @@
         </div>
     </div>
 
-    <section id="formation" class="bg-alt">
+    <section id="formation">
         <h3>Formation</h3>
         <p>
             Présentez ici votre parcours universitaire, vos diplômes, vos certifications,<br>
@@ -186,7 +347,7 @@
         </p>
     </section>
 
-    <section id="experience" class="bg-alt">
+    <section id="experience">
         <h3>Expérience</h3>
         <p>
             Présentez vos expériences professionnelles antérieures, les postes occupés,<br>
@@ -194,7 +355,7 @@
         </p>
     </section>
 
-    <section id="projet" class="bg-alt">
+    <section id="projet">
         <h3>Projet</h3>
         <p>
             Décrivez vos projets personnels ou professionnels, partagez des liens vers des démos,<br>
@@ -202,12 +363,45 @@
         </p>
     </section>
 
-    <section id="contact" class="bg-alt">
+    <section id="contact">
         <h3>Contact</h3>
-        <p>
-            Indiquez comment vous contacter : adresse e-mail, formulaire de contact, LinkedIn, etc.
-        </p>
+        <form>
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Votre message" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
     </section>
 
+    <script>
+        const toggleBtn = document.querySelector('.mode-toggle');
+        const body = document.body;
+        const iconLight = document.getElementById('icon-light');
+        const iconDark = document.getElementById('icon-dark');
+
+        function updateIcons() {
+        if (body.classList.contains('light-mode')) {
+            iconLight.style.display = 'inline-block';
+            iconDark.style.display = 'none';
+        } else {
+            iconLight.style.display = 'none';
+            iconDark.style.display = 'inline-block';
+        }
+        }
+
+        toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        updateIcons();
+        });
+
+        // Initial
+        updateIcons();
+    </script>
 </body>
 </html>
