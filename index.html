@@ -5,886 +5,576 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - DIDIER Maxime</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         :root {
-            --font-family: "Helvetica Neue", Arial, sans-serif;
-            --transition-speed: 0.3s;
-
-            /* Couleurs mode clair (plus contrastées) */
-            --bg-gradient-light: linear-gradient(to right, #f7f7f7, #ececec);
-            /* Fond gris clair, plus contrasté */
-            --text-color-light: #333;
-            --nav-bg-light: rgba(255, 255, 255, 0.8);
-            /* Nav plus visible en mode clair */
-            --input-bg-light: #ffffff;
-            /* Champs bien blancs */
-            --button-bg-light: #333;
-            /* Bouton foncé (gris très foncé) */
-            --button-text-light: #fff;
-            /* Texte du bouton blanc pour contraste */
-
-            /* Couleurs mode sombre (inchangées) */
-            --bg-gradient-dark: linear-gradient(to right, #353b48, #2f3640);
-            --text-color-dark: #fff;
-            --nav-bg-dark: rgba(0, 0, 0, 0.3);
-            --input-bg-dark: rgba(255, 255, 255, 0.1);
-            --button-bg-dark: #fff;
-            --button-text-dark: #333;
+            /* Mode sombre par défaut */
+            --section-bg: #212529;
+            /* Fond sombre uniforme */
+            --text-color: #f0f0f0;
+            --primary-color: #0d6efd;
+            --secondary-color: #adb5bd;
+            --body-bg: #212529;
+            --navbar-bg: #1a1a1a;
+            /* Navbar un peu plus sombre en dark */
         }
 
-        body.light-mode section:nth-of-type(even) {
-            background: #e0e0e0;
-            /* Gris plus foncé pour mieux délimiter les sections en mode clair */
+        body.light {
+            /* Mode clair */
+            --section-bg: #ffffff;
+            /* Fond clair uniforme */
+            --text-color: #212529;
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --body-bg: #ffffff;
+            --navbar-bg: #f0f0f0;
+            /* Navbar légèrement grisée en clair */
         }
 
 
-        body {
-            font-family: var(--font-family);
-            margin: 0;
-            padding: 0;
-            background: var(--bg-gradient-dark);
-            color: var(--text-color-dark);
-            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
-            scroll-behavior: smooth;
-        }
 
-        body.light-mode {
-            background: var(--bg-gradient-light);
-            color: var(--text-color-light);
-        }
-
-        /* Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--nav-bg-dark);
-            backdrop-filter: blur(5px);
-            z-index: 999;
-            transition: background var(--transition-speed) ease;
-        }
-
-        body.light-mode header {
-            background: var(--nav-bg-light);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0;
-        }
-
-        nav ul li a {
-            color: inherit;
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: transform var(--transition-speed), color var(--transition-speed);
-        }
-
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: currentColor;
-            transition: width var(--transition-speed) ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        nav ul li a:hover {
-            transform: scale(1.05);
-        }
-
-        /* Bouton mode clair/sombre */
-        .mode-toggle {
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 20px;
-            background: var(--button-bg-dark);
-            color: var(--button-text-dark);
-            transition: background var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .mode-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        body.light-mode .mode-toggle {
-            background: var(--button-bg-light);
-            color: var(--button-text-light);
-        }
-
-        /* Section Héro */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding-top: 100px;
-            box-sizing: border-box;
-            width: 100%;
-            opacity: 0;
-            animation: fade-in 1.5s ease forwards;
-        }
-
-        h1,
-        h2 {
-            margin: 10px;
-            text-align: center;
-            opacity: 0;
-            animation: slide-in var(--transition-speed) ease forwards;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            animation-delay: 0.3s;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            animation-delay: 0.6s;
-        }
-
-        @keyframes fade-in {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slide-in {
-            0% {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .info {
-            margin-top: 20px;
-            text-align: center;
-            line-height: 1.6;
-            opacity: 0;
-            animation: slide-in 1s ease forwards;
-            animation-delay: 0.9s;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 2px solid currentColor;
-            transition: color var(--transition-speed), border-color var(--transition-speed);
-        }
-
-        a:hover {
-            color: hsl(212, 100%, 50%);
-            border-color: hsl(212, 100%, 50%);
-        }
-
-        /* Sections */
+        /* Toutes les sections, y compris hero et contact, même fond */
         section {
-            width: 100%;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: var(--text-color);
+            background-color: var(--section-bg);
             padding: 100px 20px;
-            box-sizing: border-box;
             text-align: center;
-            opacity: 0;
-            animation: fade-up 0.8s ease forwards;
         }
 
-        section:nth-of-type(even) {
-            background: rgba(0, 0, 0, 0.1);
+        /* Hero section sans gradient, même fond que les autres */
+        .hero {
+            background-color: var(--section-bg);
+            color: var(--text-color);
+            padding: 100px 0;
         }
 
-        body.light-mode section:nth-of-type(even) {
-            background: rgba(255, 255, 255, 0.2);
+        /* Navbar utilise sa propre variable */
+        .navbar {
+            background-color: var(--navbar-bg) !important;
         }
 
-        section h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-        }
 
-        section p {
-            line-height: 1.6;
-            margin: 0 auto;
-            max-width: 800px;
-        }
-
-        @keyframes fade-up {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Formulaire de contact */
-        form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: 0 auto;
-            gap: 15px;
-        }
-
-        label {
-            text-align: left;
-            font-weight: 500;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            color: inherit;
-            background: var(--input-bg-dark);
-            transition: background var(--transition-speed), color var(--transition-speed);
-        }
-
-        body.light-mode input,
-        body.light-mode textarea {
-            background: var(--input-bg-light);
-            color: var(--text-color-light);
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: 2px solid hsl(212, 100%, 50%);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-mode input:focus,
-        body.light-mode textarea:focus {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        button {
-            padding: 10px;
-            background: var(--button-bg-dark);
-            color: var(--button-text-dark);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
-        }
-
-        body.light-mode button {
-            background: var(--button-bg-light);
-            color: var(--button-text-light);
-        }
-
-        button:hover {
-            background: hsl(212, 100%, 50%);
-            color: #333;
-            transform: scale(1.05);
-        }
-
-        .timeline {
-            position: relative;
-            margin: 50px 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), #c23616);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            backdrop-filter: blur(10px);
+        .project-card {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
-            margin: 40px 0;
-            width: 90%;
-            max-width: 600px;
             text-align: center;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: transform 0.6s ease, opacity 0.6s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #e84118;
-            border-radius: 50%;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 3px solid #fff;
-        }
-
-        .timeline-item:hover {
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .timeline-date {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            color: inherit;
-            /* Au lieu de #f5f6fa ou autre couleur fixe */
-        }
-
-        .timeline-content h4 {
-            margin: 0;
-            font-size: 1.7rem;
-            margin-bottom: 10px;
-            color: inherit;
-            /* Au lieu de #fff */
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .timeline-content p {
-            margin: 0;
-            font-size: 1rem;
-            line-height: 1.4;
-            color: inherit;
-            /* Au lieu de #fff */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
-        }
-
-
-        /* Classe .show ajoutée en JS lorsque l’item est visible */
-        .timeline-item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .timeline-item.show h4,
-        .timeline-item.show p {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #experience {
-            position: relative;
-            padding: 100px 20px;
-            text-align: center;
-            opacity: 0;
-            animation: fade-up 0.8s ease forwards;
-        }
-
-        #experience h3 {
-            font-size: 2rem;
-            margin-bottom: 50px;
-        }
-
-        /* Container qui aligne les cartes au centre et les rend responsive */
-        .experience-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Style des cartes */
-        .experience-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 30px 20px;
-            width: 300px;
-            max-width: 90%;
-            text-align: left;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(30px);
-            opacity: 0;
-            transition: transform 0.6s ease, opacity 0.6s ease;
-        }
-
-        /* Survol de la carte pour un effet subtil */
-        .experience-card:hover {
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Logo entreprise */
-        .company-logo {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .company-logo img {
-            max-width: 60px;
-            height: auto;
-            border-radius: 50%;
-        }
-
-        /* Titres et textes */
-        .experience-card h4 {
-            margin: 10px 0;
-            font-size: 1.5rem;
-            color: inherit;
-            /* Au lieu de #fff */
-            font-weight: 600;
-        }
-
-        .experience-card .company {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 500;
-            color: inherit;
-            /* Au lieu de #fff */
-            margin-bottom: 5px;
-        }
-
-        .experience-card .period {
-            margin: 0;
-            font-size: 0.9rem;
-            color: inherit;
-            /* Au lieu de #ddd ou autre */
-            margin-bottom: 15px;
-        }
-
-        .experience-card .tasks li {
-            font-size: 0.95rem;
-            line-height: 1.4;
-            color: inherit;
-            /* Au lieu de #fff */
-            margin-bottom: 8px;
-        }
-
-        .experience-card .period {
-            color: rgba(0, 0, 0, 0.7);
-            /* En dark mode, ce sera #fff multiplié par l'héritage, donc plus clair */
-        }
-
-
-        /* Animation lorsqu'elles apparaissent à l’écran */
-        .experience-card.show-exp {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Keyframe utilisée pour la section elle-même */
-        @keyframes fade-up {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .experience-card {
-                width: 90%;
-            }
-        }
-
-        #projet {
-            position: relative;
-            padding: 100px 20px;
-            text-align: center;
-            opacity: 0;
-            animation: fade-up 0.8s ease forwards;
-        }
-
-        #projet h3 {
-            font-size: 2rem;
-            margin-bottom: 50px;
-        }
-
-        /* Grille de projets responsive */
-        .projects-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 30px 20px;
-            width: 300px;
-            max-width: 90%;
-            text-align: left;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(30px);
-            opacity: 0;
-            transition: transform 0.6s ease, opacity 0.6s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .project-card:hover {
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .project-card h4 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: inherit;
-            /* pas #fff */
-            font-weight: 600;
-        }
-
-        .project-card p {
-            margin: 0;
-            font-size: 1rem;
-            line-height: 1.4;
-            color: inherit;
-            /* pas #fff */
-        }
-
-
-        /* Badges techniques */
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .tech-stack span {
-            background: hsl(212, 100%, 50%);
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* Classe ajoutée par JS à l'apparition */
-        .project-card.show-proj {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animation d'apparition de la section */
-        @keyframes fade-up {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .project-card {
-                width: 90%;
-            }
-        }
-
-        section+hr {
-            border: none;
-            height: 2px;
-            max-width: 100px;
-            margin: 0 auto;
-            background: hsl(212, 100%, 50%);
-            opacity: 0.5;
         }
 
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #fff;
-            /* Couleur par défaut (mode sombre) */
-            color: #000;
-            /* Couleur de l'icône en mode sombre */
             width: 40px;
             height: 40px;
+            background: #000;
+            color: #fff;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s, background 0.3s, color 0.3s;
-            z-index: 999;
+            display: none;
         }
 
         .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
+            display: flex;
         }
 
-        .back-to-top:hover {
-            transform: scale(1.1);
+        .collapse.navbar-collapse {
+            text-align: center;
         }
 
-        /* Lorsque le site est en mode clair, le bouton devient noir et l'icône blanche */
-        body.light-mode .back-to-top {
-            background: #000;
+        .navbar-nav {
+            margin: 0 auto;
+            /* Centre les liens */
+        }
+
+        #mode-toggle svg {
+            margin-right: 5px;
+        }
+
+        body.light {
+            --bs-body-bg: #ffffff;
+            --bs-body-color: #212529;
+        }
+
+        body.dark {
+            --bs-body-bg: #212529;
+            --bs-body-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light .timeline-item {
+            background: #fff;
+            /* Fond blanc */
+            color: #212529;
+            /* Texte sombre */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            /* Fond semi-transparent */
             color: #fff;
+            /* Texte clair */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        body.light .bg-light {
+            background-color: #fff !important;
+            color: #212529 !important;
+        }
+
+        body.dark .bg-light {
+            background-color: #343a40 !important;
+            color: #fff !important;
+        }
+
+        body.light .project-card {
+            background-color: #fff;
+            color: #212529;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .project-card {
+            background-color: #343a40;
+            color: #f8f9fa;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card .badge {
+            margin-right: 5px;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        section#formation {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        section#formation h2 {
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+
+        :root {
+            /* Couleur du texte par défaut (mode sombre par exemple) */
+            --nav-text-color: #f0f0f0;
+        }
+
+        body.light {
+            /* En mode clair, une couleur plus sombre adaptée au fond clair */
+            --nav-text-color: #333;
+        }
+
+        body.dark {
+            /* En mode sombre, une couleur plus claire adaptée au fond sombre */
+            --nav-text-color: #f0f0f0;
+        }
+
+        .navbar .nav-link {
+            color: var(--nav-text-color) !important;
+        }
+
+        .arrow-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .arrow-icon {
+            font-size: 2rem;
+            color: #fff;
+            animation: arrow-bounce 1.5s infinite ease-in-out;
+        }
+
+        /* En mode clair, la couleur devient sombre */
+        body.light .arrow-icon {
+            font-size: 2rem;
+            color: #333;
+            animation: arrow-bounce 1.5s infinite ease-in-out;
+        }
+
+
+        @keyframes arrow-bounce {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        .form-label {
+            text-align: left !important;
+        }
+
+        .form-control {
+            background-color: #333;
+            /* Une nuance plus claire que #212529 */
+            color: #f0f0f0;
+            border: 1px solid #444;
+            /* Une bordure légèrement contrastée */
+        }
+
+        #hero-title {
+            display: inline-block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid currentColor;
+            width: 0;
+            animation: typing 3s steps(20, end) forwards;
+        }
+
+        /* Ajustez la largeur (ch) selon la longueur du nom */
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 14ch;
+            }
+        }
+
+        h2 {
+            line-height: 1;
+            /* S'assure que la hauteur du texte ne dépasse pas */
+        }
+
+        .bi-briefcase {
+            vertical-align: middle;
+            /* Centre l'icône par rapport à la ligne */
         }
     </style>
 </head>
 
-<body>
-    <header>
-        <nav>
-            <div class="left-nav">
-                <ul>
-                    <li><a href="#hero">Accueil</a></li>
-                    <li><a href="#formation">Formation</a></li>
-                    <li><a href="#experience">Expérience</a></li>
-                    <li><a href="#projet">Projet</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <button class="mode-toggle">
-                <!-- Icône Lune (mode sombre) -->
-                <svg id="icon-dark" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
-                </svg>
-
-                <!-- Icône Soleil (mode clair) -->
-                <svg id="icon-light" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
+<body class="dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#hero">
+                <img src="./Logo.png" alt="Logo" style="height:40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-        </nav>
-    </header>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Expérience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projet">Projet</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <button id="toggleTheme" class="btn btn-outline-secondary ms-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun"
+                        viewBox="0 0 16 16" id="sun-icon">
+                        <path
+                            d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-moon d-none" viewBox="0 0 16 16" id="moon-icon">
+                        <path
+                            d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-    <section id="hero">
-        <div class="hero">
-            <h1>DIDIER Maxime</h1>
-            <h2>Développeur 2.0</h2>
-            <div class="info">
-                Bienvenue sur mon portfolio !<br>
-                Passionné par la création d’expériences web modernes, je me spécialise dans le développement front-end
-                avec
-                HTML, CSS et JavaScript.<br><br>
-                Vous pouvez consulter mes projets, mon CV détaillé, et en savoir plus sur mon parcours.<br><br>
-                <a href="https://github.com/DevMax1me">Voir mon GitHub</a>
+    <section id="hero" class="hero py-5 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Colonne de gauche : photo -->
+                <div class="col-md-4 d-flex justify-content-center mb-4 mb-md-0">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQHV_gi6wkF7TQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1688733570474?e=1739404800&v=beta&t=84XNpU0QVdnXt0V-EwEJ-554U9bCxwP5VwKOwIywR38"
+                        alt="Votre photo" class="img-fluid rounded-circle" style="max-width: 200px;">
+                </div>
+                <!-- Colonne de droite : nom et description -->
+                <div class="col-md-8 text-center text-md-start">
+                    <h1 id="hero-title" class="mb-3">DIDIER Maxime</h1>
+                    <p id="hero-subtitle" class="mb-0">
+                        Développeur passionné, je crée des expériences web modernes, performantes
+                        et sur-mesure. En freelance ou en CDI, faisons équipe pour concrétiser
+                        vos ambitions numériques.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <hr>
-    <section id="formation">
-        <h3>Formation</h3>
-        <div class="timeline">
-            <div class="timeline-item animate">
-                <div class="timeline-date">2017</div>
-                <div class="timeline-content">
-                    <h4>Baccalauréat S (SVT)</h4>
-                    <p>Saint Marc, Nivolas-Vermelle</p>
-                </div>
+
+    <!-- Formation Section -->
+    <section id="formation" class="py-5">
+        <div class="container text-center">
+            <div class="d-flex align-items-center justify-content-center mb-5">
+                <h2 class="mb-0 me-3">Mon Parcours Scolaire</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-backpack-fill" viewBox="0 0 16 16">
+                    <path d="M5 13v-3h4v.5a.5.5 0 0 0 1 0V10h1v3z" />
+                    <path
+                        d="M6 2v.341C3.67 3.165 2 5.388 2 8v5.5A2.5 2.5 0 0 0 4.5 16h7a2.5 2.5 0 0 0 2.5-2.5V8a6 6 0 0 0-4-5.659V2a2 2 0 1 0-4 0m2-1a1 1 0 0 1 1 1v.083a6 6 0 0 0-2 0V2a1 1 0 0 1 1-1m0 3a4 4 0 0 1 3.96 3.43.5.5 0 1 1-.99.14 3 3 0 0 0-5.94 0 .5.5 0 1 1-.99-.14A4 4 0 0 1 8 4M4.5 9h7a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5" />
+                </svg>
             </div>
-            <div class="timeline-item animate">
-                <div class="timeline-date">2021</div>
-                <div class="timeline-content">
-                    <h4>BTS SNIR</h4>
-                    <p>ORT, Lyon</p>
+            <div class="row justify-content-center align-items-center g-4">
+
+                <!-- Baccalauréat -->
+                <div class="col-12 col-md-auto">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius:10px;">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+                            <div class="mb-2" style="font-size:0.9rem; color:var(--secondary-color, #6c757d);">
+                                2017
+                            </div>
+                            <h5 class="card-title fw-bold mb-1">Baccalauréat S (SVT)</h5>
+                            <p class="card-text mb-0" style="font-size:0.95rem; color:var(--bs-body-color);">
+                                Saint Marc, Nivolas-Vermelle
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item animate">
-                <div class="timeline-date">2022</div>
-                <div class="timeline-content">
-                    <h4>Bachelor CSI (Mention Bien)</h4>
-                    <p>ORT, Lyon</p>
+
+                <!-- Flèche -->
+                <div class="col-12 col-md-auto d-none d-md-block">
+                    <div class="arrow-container">
+                        <i class="bi bi-arrow-right-circle-fill arrow-icon"></i>
+                    </div>
                 </div>
+
+                <!-- BTS SNIR -->
+                <div class="col-12 col-md-auto">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius:10px;">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+                            <div class="mb-2" style="font-size:0.9rem; color:var(--secondary-color, #6c757d);">
+                                2021
+                            </div>
+                            <h5 class="card-title fw-bold mb-1">BTS SNIR</h5>
+                            <p class="card-text mb-0" style="font-size:0.95rem; color:var(--bs-body-color);">
+                                ORT, Lyon
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flèche -->
+                <div class="col-12 col-md-auto d-none d-md-block">
+                    <div class="arrow-container">
+                        <i class="bi bi-arrow-right-circle-fill arrow-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Bachelor CSI -->
+                <div class="col-12 col-md-auto">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius:10px;">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+                            <div class="mb-2" style="font-size:0.9rem; color:var(--secondary-color, #6c757d);">
+                                2022
+                            </div>
+                            <h5 class="card-title fw-bold mb-1">Bachelor CSI (Mention Bien)</h5>
+                            <p class="card-text mb-0" style="font-size:0.95rem; color:var(--bs-body-color);">
+                                ORT, Lyon
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flèche -->
+                <div class="col-12 col-md-auto d-none d-md-block">
+                    <div class="arrow-container">
+                        <i class="bi bi-arrow-right-circle-fill arrow-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Master MS2D -->
+                <div class="col-12 col-md-auto">
+                    <div class="card border-0 shadow-sm h-100" style="border-radius:10px;">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+                            <div class="mb-2" style="font-size:0.9rem; color:var(--secondary-color, #6c757d);">
+                                2024
+                            </div>
+                            <h5 class="card-title fw-bold mb-1">Master MS2D (Mention Bien)</h5>
+                            <p class="card-text mb-0" style="font-size:0.95rem; color:var(--bs-body-color);">
+                                ORT, Lyon
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="timeline-item animate">
-                <div class="timeline-date">2024</div>
-                <div class="timeline-content">
-                    <h4>Master MS2D (2ème de promo, Mention Bien)</h4>
-                    <p>ORT, Lyon</p>
+        </div>
+    </section>
+
+
+    <!-- Expérience Section -->
+    <section id="experience" class="py-5">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center mb-5">
+                <h2 class="mb-0 me-3">Expériences</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-briefcase" viewBox="0 0 16 16">
+                    <path
+                        d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
+                </svg>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <h5>CTO</h5>
+                        <p>Startup BasitMark, Paris (2023 - Actuellement)</p>
+                        <ul class="list-unstyled">
+                            <li>Gestion de projet</li>
+                            <li>Développement React Native</li>
+                            <li>Développement Symfony PHP</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <h5>Alternant Full Stack</h5>
+                        <p>CEBEL Habitat, Saint-Quentin-Fallavier (2021 - 2024)</p>
+                        <ul class="list-unstyled">
+                            <li>API REST (PHP)</li>
+                            <li>Full Stack Symfony</li>
+                            <li>Gestion d'infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <h5>Informaticien</h5>
+                        <p>SEROO Informatique, Saint Clair de la tour (Juin 2020 - Sept 2020)</p>
+                        <ul class="list-unstyled">
+                            <li>Reconditonnement d'ordinateur fixe et portable</li>
+                            <li>Réparation d'ordinateur et téléphone</li>
+                            <li>Correction sur le site WordPress</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <hr>
-    <section id="experience">
-        <h3>Expériences</h3>
-        <div class="experience-container">
-            <!-- Exemple d'expérience 1 -->
-            <div class="experience-card animate-exp">
-                <div class="company-logo">
-                    <!-- Vous pouvez mettre un logo d'entreprise sous forme d'img ou d'icône -->
-                    <img src="url-vers-logo-entreprise-1.png" alt="Logo Entreprise 1">
-                </div>
-                <h4>CTO</h4>
-                <p class="company">Startup BasitMark, Paris</p>
-                <p class="period">Septembre 2023 - Actuellement</p>
-                <ul class="tasks">
-                    <li>Gestion du projet</li>
-                    <li>Développeur React Native</li>
-                    <li>Développeur Symfony PHP</li>
-                </ul>
-            </div>
 
-            <!-- Exemple d'expérience 2 -->
-            <div class="experience-card animate-exp">
-                <div class="company-logo">
-                    <img src="url-vers-logo-entreprise-2.png" alt="Logo Entreprise 2">
-                </div>
-                <h4>Alternant développeur Full Stack</h4>
-                <p class="company">CEBEL Habitat, Saint-Quentin-Fallavier</p>
-                <p class="period">Septembre 2021 - Septembre 2024</p>
-                <ul class="tasks">
-                    <li>Développement d'API REST (PHP)</li>
-                    <li>Développeur Full Stack (symfony, PHP / Twig, html, css)</li>
-                    <li>Création d’interfaces (Python)</li>
-                    <li>Gestion de l'infrastructure</li>
-                </ul>
+    <section id="projet" class="py-5">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center mb-5">
+                <h2 class="mb-0 me-3">Projets</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-pencil"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                </svg>
             </div>
-            <div class="experience-card animate-exp">
-                <div class="company-logo">
-                    <img src="url-vers-logo-entreprise-2.png" alt="Logo Entreprise 2">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card project-card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">BasitMark</h5>
+                            <p class="card-text">Développement front et back, application mobile, disponible sur les
+                                stores.</p>
+                            <div class="tech-stack">
+                                <span class="badge bg-primary">React Native</span>
+                                <span class="badge bg-secondary">Symfony</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h4>Informaticien</h4>
-                <p class="company">SEROO Informatique, Saint Clair de la tour</p>
-                <p class="period">Juin 2020 - Septembre 2020</p>
-                <ul class="tasks">
-                    <li>Reconditonnement d'ordinateur fixe et portable</li>
-                    <li>Réparation d'ordinateur et téléphone</li>
-                    <li>Correction sur le site WordPress</li>
-                </ul>
-            </div>
-    </section>
-    <hr>
-    <section id="projet">
-        <h3>Projets</h3>
-        <div class="projects-grid">
-            <div class="project-card animate-proj">
-                <h4>BasitMark</h4>
-                <p>Développement front et back, application mobile en React Native & Symfony, disponible sur les stores.
-                </p>
-                <div class="tech-stack">
-                    <span>React Native</span><span>Symfony</span>
-                </div>
-            </div>
 
-            <div class="project-card animate-proj">
-                <h4>Picshoot</h4>
-                <p>Développement back et front, intégration d’IA en Python, React.js, et Symfony PHP.</p>
-                <div class="tech-stack">
-                    <span>Python</span><span>React.js</span><span>Symfony</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card project-card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Picshoot</h5>
+                            <p class="card-text">Développement back et front, intégration d’IA de vérification.</p>
+                            <div class="tech-stack">
+                                <span class="badge bg-success">Python</span>
+                                <span class="badge bg-info">React.js</span>
+                                <span class="badge bg-secondary">Symfony</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="project-card animate-proj">
-                <h4>PatateDouce</h4>
-                <p>Développement front et back, technologies HTML, CSS, et Symfony PHP.</p>
-                <div class="tech-stack">
-                    <span>HTML</span><span>CSS</span><span>Symfony</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card project-card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">PatateDouce</h5>
+                            <p class="card-text">Développement front et back. Solution pour contacter des vendeurs
+                                locaux.</p>
+                            <div class="tech-stack">
+                                <span class="badge bg-warning text-dark">HTML</span>
+                                <span class="badge bg-danger">CSS</span>
+                                <span class="badge bg-secondary">Symfony</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="project-card animate-proj">
-                <h4>QR Code</h4>
-                <p>Développement back et front en Python. Génération et gestion de QR Codes.</p>
-                <div class="tech-stack">
-                    <span>Python</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card project-card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">QR Code</h5>
+                            <p class="card-text">Développement back et front. Génération et gestion de QR Codes.</p>
+                            <div class="tech-stack">
+                                <span class="badge bg-success">Python</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <hr>
-    <section id="contact">
-        <h3>Contact</h3>
-        <form id="contact-form">
-            <label for="name">Nom</label>
-            <input type="text" id="name" name="name" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Envoyer</button>
-        </form>
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact</h2>
+            <form id="contact-form">
+                <div class="mb-3 text-start">
+                    <label for="name" class="form-label">Nom</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
     </section>
-    <div class="back-to-top" id="back-to-top">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"></path>
-        </svg>
-    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="back-to-top">&#8679;</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <script>
@@ -907,88 +597,37 @@
                 });
         });
 
-        const toggleBtn = document.querySelector('.mode-toggle');
         const body = document.body;
-        const iconLight = document.getElementById('icon-light');
-        const iconDark = document.getElementById('icon-dark');
+        const toggleThemeButton = document.getElementById("toggleTheme");
+        const sunIcon = document.getElementById("sun-icon");
+        const moonIcon = document.getElementById("moon-icon");
 
-        function updateIcons() {
-            if (body.classList.contains('light-mode')) {
-                iconLight.style.display = 'inline-block';
-                iconDark.style.display = 'none';
+        const navbar = document.querySelector(".navbar"); // Sélection de la navbar
+
+        toggleThemeButton.addEventListener("click", () => {
+            if (body.classList.contains("light")) {
+                // Passer en mode sombre
+                body.classList.replace("light", "dark");
+                sunIcon.classList.remove("d-none");
+                moonIcon.classList.add("d-none");
+                // Changement de la navbar vers un style sombre
+                navbar.classList.remove("navbar-light", "bg-light");
+                navbar.classList.add("navbar-dark", "bg-dark");
             } else {
-                iconLight.style.display = 'none';
-                iconDark.style.display = 'inline-block';
+                // Passer en mode clair
+                body.classList.replace("dark", "light");
+                sunIcon.classList.add("d-none");
+                moonIcon.classList.remove("d-none");
+                // Changement de la navbar vers un style clair
+                navbar.classList.remove("navbar-dark", "bg-dark");
+                navbar.classList.add("navbar-light", "bg-light");
             }
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            updateIcons();
         });
 
-        // Initial
-        updateIcons();
 
-        // Intersection Observer pour les éléments de la timeline
-        const items = document.querySelectorAll('.timeline-item.animate');
 
-        const observerOptions = {
-            threshold: 0.2
-        };
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        items.forEach(item => {
-            observer.observe(item);
-        });
-        const expItems = document.querySelectorAll('.experience-card.animate-exp');
-
-        const expObserverOptions = {
-            threshold: 0.2
-        };
-
-        const expObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show-exp');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, expObserverOptions);
-
-        expItems.forEach(item => {
-            expObserver.observe(item);
-        });
-
-        const projItems = document.querySelectorAll('.project-card.animate-proj');
-
-        const projObserverOptions = {
-            threshold: 0.2
-        };
-
-        const projObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show-proj');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, projObserverOptions);
-
-        projItems.forEach(item => {
-            projObserver.observe(item);
-        });
-
+        // Back to top
         const backToTop = document.getElementById('back-to-top');
-
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 backToTop.classList.add('show');
@@ -996,11 +635,9 @@
                 backToTop.classList.remove('show');
             }
         });
-
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
 
     </script>
 
